@@ -25,32 +25,44 @@ namespace CleanWebAPI.Controllers
             return Ok(result);
         }
 
-        // GET api/<ValuesController>/5
+        // GET api/<ProductController>/5
         [HttpGet]
         [Route("GetProductById/{id}")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> GetProduct(int id)
         {
             var query = new GetProductByIdQuery(id);
             var result = await _mediator.Send(query);
             return result != null ? Ok(result) : NotFound();
         }
 
-        // POST api/<ValuesController>
+        // POST api/<ProductController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("[action]")]
+        public async Task<IActionResult> UpdateProduct([FromBody] Product product)
         {
+            var query = new UpdateProductQuery(product);
+            var result = await _mediator.Send(query);
+            return result != null ? Ok(result) : NotFound();
         }
 
-        // PUT api/<ValuesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // PUT api/<ProductController>/5
+        [HttpPut]
+        [Route("[action]")]
+        public async Task<IActionResult> CreateProduct([FromBody] Product product)
         {
+            var query = new CreateProductQuery(product);
+            var result = await _mediator.Send(query);
+            return result != null ? Ok(result) : NotFound();
         }
 
-        // DELETE api/<ValuesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // DELETE api/<ProductController>/5
+        [HttpDelete]
+        [Route("[action]/{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
+            var query = new DeleteProductQuery(id);
+            var result = await _mediator.Send(query);
+            return result == 1 ? Ok(result) : NotFound();
         }
     }
 }
