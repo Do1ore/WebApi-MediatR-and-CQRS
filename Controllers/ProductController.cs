@@ -1,5 +1,4 @@
-﻿using CleanWebAPI.Handlers;
-using CleanWebAPI.Models;
+﻿using CleanWebAPI.Models;
 using CleanWebAPI.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

@@ -1,10 +1,12 @@
-﻿using CleanWebAPI.Models;
+﻿
+using CleanWebAPI.Models;
 using CleanWebAPI.Models.Context;
 using CleanWebAPI.Repositories.Interfaces;
 using CleanWebAPI.Requests;
 using MediatR;
+using System.Runtime.CompilerServices;
 
-namespace CleanWebAPI.Handlers
+namespace CleanWebAPI.CQRS.Handlers
 {
     public class CreateProductHandler : IRequestHandler<CreateProductQuery, Product>
     {
@@ -18,6 +20,7 @@ namespace CleanWebAPI.Handlers
         public async Task<Product> Handle(CreateProductQuery request, CancellationToken cancellationToken)
         {
             await _repository.AddProduct(request.Product);
+
             return request.Product;
         }
     }

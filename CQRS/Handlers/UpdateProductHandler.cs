@@ -1,11 +1,9 @@
 ﻿using CleanWebAPI.Models;
-using CleanWebAPI.Models.Context;
 using CleanWebAPI.Repositories.Interfaces;
 using CleanWebAPI.Requests;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
-namespace CleanWebAPI.Handlers
+namespace CleanWebAPI.CQRS.Handlers
 {
     public class UpdateProductHandler : IRequestHandler<UpdateProductQuery, Product>
     {
@@ -19,6 +17,7 @@ namespace CleanWebAPI.Handlers
         public async Task<Product> Handle(UpdateProductQuery request, CancellationToken cancellationToken)
         {
             await _repository.UpdateProductAsync(request.Proudct);
+
             return request.Proudct;
         }
     }

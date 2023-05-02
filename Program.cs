@@ -15,6 +15,8 @@ builder.Services.AddDbContext<MyPetContext>(options => options
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddMediatR(cfg => cfg
                 .RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+builder.Services.AddMemoryCache();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

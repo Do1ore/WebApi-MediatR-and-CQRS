@@ -1,9 +1,8 @@
-﻿using CleanWebAPI.Models;
-using CleanWebAPI.Repositories.Interfaces;
+﻿using CleanWebAPI.Repositories.Interfaces;
 using CleanWebAPI.Requests;
 using MediatR;
 
-namespace CleanWebAPI.Handlers
+namespace CleanWebAPI.CQRS.Handlers
 {
     public class DeleteProductHandler : IRequestHandler<DeleteProductQuery, int>
     {
