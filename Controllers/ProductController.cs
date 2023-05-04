@@ -1,5 +1,5 @@
-﻿using CleanWebAPI.Models;
-using CleanWebAPI.Requests;
+﻿using CleanWebAPI.CQRS.Products.Requests;
+using CleanWebAPI.Models.MainModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,4 +1,4 @@
-﻿using CleanWebAPI.Models;
+﻿using CleanWebAPI.Models.MainModels;
 
 namespace CleanWebAPI.Repositories.Interfaces
 {

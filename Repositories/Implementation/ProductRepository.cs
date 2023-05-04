@@ -1,5 +1,5 @@
-﻿using CleanWebAPI.Models;
-using CleanWebAPI.Models.Context;
+﻿using CleanWebAPI.Models.Context;
+using CleanWebAPI.Models.MainModels;
 using CleanWebAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http.HttpResults;

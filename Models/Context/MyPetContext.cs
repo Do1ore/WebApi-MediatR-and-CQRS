@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanWebAPI.Models.MainModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanWebAPI.Models.Context;
