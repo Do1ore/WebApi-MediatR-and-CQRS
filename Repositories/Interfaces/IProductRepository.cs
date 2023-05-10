@@ -9,5 +9,7 @@ namespace CleanWebAPI.Repositories.Interfaces
         public Task<Product> AddProduct(Product product);
         public Task<int> UpdateProductAsync(Product product);
         public Task<int> DeleteProductAsync(int id);
+
+        public bool IsExists(int id);
     }
 }

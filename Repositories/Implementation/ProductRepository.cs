@@ -44,6 +44,11 @@ namespace CleanWebAPI.Repositories.Implementation
             return await _db.Products.AsNoTracking().ToListAsync();
         }
 
+        public bool IsExists(int id)
+        {
+            return _db.Products.AsNoTracking().Any(p => p.Id == id);
+        }
+
         public async Task<int> UpdateProductAsync(Product product)
         {
             _db.Products.Update(product);

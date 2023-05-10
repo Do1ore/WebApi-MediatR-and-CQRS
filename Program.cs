@@ -1,3 +1,4 @@
+using CleanWebAPI.Exceptions.Middlewares;
 using CleanWebAPI.Models.Context;
 using CleanWebAPI.Repositories.Implementation;
 using CleanWebAPI.Repositories.Interfaces;
@@ -33,8 +34,13 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseCustomExceptionHandler();
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+else
+{
+
 }
 
 app.UseHttpsRedirection();

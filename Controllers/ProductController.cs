@@ -44,7 +44,7 @@ namespace CleanWebAPI.Controllers
             return result != null ? Ok(result) : NotFound();
         }
 
-        // PUT api/<ProductController>/5
+        // PUT api/<ProductController>
         [HttpPut]
         [Route("[action]")]
         public async Task<IActionResult> CreateProduct([FromBody] Product product)

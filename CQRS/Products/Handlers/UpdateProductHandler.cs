@@ -1,4 +1,5 @@
 ﻿using CleanWebAPI.CQRS.Products.Requests;
+using CleanWebAPI.Exceptions;
 using CleanWebAPI.Models.MainModels;
 using CleanWebAPI.Repositories.Interfaces;
 using MediatR;
@@ -16,9 +17,14 @@ namespace CleanWebAPI.CQRS.Products.Handlers
 
         public async Task<Product> Handle(UpdateProductQuery request, CancellationToken cancellationToken)
         {
-            await _repository.UpdateProductAsync(request.Proudct);
+            if (request.Product == null || !_repository.IsExists(request.Product.Id))
+            {
+                throw new BadRequestException(nameof(Product));
+            }
+           
+            await _repository.UpdateProductAsync(request.Product);
 
-            return request.Proudct;
+            return request.Product;
         }
     }
 }

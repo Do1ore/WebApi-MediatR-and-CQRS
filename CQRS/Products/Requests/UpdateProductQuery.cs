@@ -5,11 +5,11 @@ namespace CleanWebAPI.CQRS.Products.Requests
 {
     public class UpdateProductQuery : IRequest<Product>
     {
-        public Product Proudct { get; }
+        public Product Product { get; }
 
         public UpdateProductQuery(Product proudct)
         {
-            Proudct = proudct;
+            Product = proudct;
         }
     }
 }

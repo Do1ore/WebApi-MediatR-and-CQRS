@@ -1,5 +1,6 @@
 ﻿using CleanWebAPI.CQRS.Products.Notifications.Notifications;
 using CleanWebAPI.CQRS.Products.Requests;
+using CleanWebAPI.Exceptions;
 using CleanWebAPI.Models.MainModels;
 using CleanWebAPI.Repositories.Interfaces;
 using MediatR;
@@ -32,7 +33,7 @@ namespace CleanWebAPI.CQRS.Products.Handlers
 
                 if (result == null)
                 {
-                    return null;
+                    throw new NotFoundException(nameof(Product), request.Id);
                 }
 
                 ProductChangedNotification productChanged = new()
