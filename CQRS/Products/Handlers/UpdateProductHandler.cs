@@ -19,7 +19,7 @@ namespace CleanWebAPI.CQRS.Products.Handlers
         {
             if (request.Product == null || !_repository.IsExists(request.Product.Id))
             {
-                throw new BadRequestException(nameof(Product));
+                return null;
             }
            
             await _repository.UpdateProductAsync(request.Product);

@@ -4,6 +4,7 @@ using CleanWebAPI.Models.Context;
 using CleanWebAPI.Models.MainModels;
 using CleanWebAPI.Repositories.Interfaces;
 using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
 using System.Runtime.CompilerServices;
 
 namespace CleanWebAPI.CQRS.Products.Handlers
@@ -21,7 +22,7 @@ namespace CleanWebAPI.CQRS.Products.Handlers
         {
             if (request.Product == null)
             {
-                throw new BadRequestException(nameof(request.Product));
+                return null;
             }
             await _repository.AddProduct(request.Product);
 

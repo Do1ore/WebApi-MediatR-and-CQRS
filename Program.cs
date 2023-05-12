@@ -1,9 +1,12 @@
-using CleanWebAPI.Exceptions.Middlewares;
+using CleanWebAPI.Exceptions;
 using CleanWebAPI.Models.Context;
 using CleanWebAPI.Repositories.Implementation;
 using CleanWebAPI.Repositories.Interfaces;
 using MediatR;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using System.Net;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,14 +37,40 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseCustomExceptionHandler();
+    app.UseExceptionHandler(builder =>
+    {
+        builder.Run(async context =>
+        {
+            var logger = context.RequestServices.GetService<ILogger<Program>>(); // Получение ILogger через внедрение зависимостей
+
+            // Получить информацию об ошибке
+            var error = context.Features.Get<IExceptionHandlerFeature>();
+
+            context.Response.StatusCode = (int)await ValidErrorCode.GetErrorCode(error.Error);
+            // Сформировать HTTP-ответ с информацией об ошибке
+            context.Response.ContentType = "application/json";
+            // Форматировать ответ с информацией об ошибке
+            var errorMessage = "Произошла ошибка.";
+            if (error != null && error.Error is Exception)
+            {
+                errorMessage = error.Error.Message;
+            }
+
+            var response = new
+            {
+                errorCode = context.Response.StatusCode,
+                error = errorMessage
+            };
+
+            var json = JsonConvert.SerializeObject(response);
+            await context.Response.WriteAsync(json);
+            logger!.LogError(response.error, json);
+        });
+    });
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-else
-{
 
-}
 
 app.UseHttpsRedirection();
 
