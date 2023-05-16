@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using CleanWebAPI.Models.MainModels;
+﻿using CleanWebAPI.Models.MainModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanWebAPI.Models.Context;
@@ -31,8 +29,6 @@ public partial class MyPetContext : DbContext
     public virtual DbSet<Cart> Carts { get; set; }
 
     public virtual DbSet<CartProduct> CartProducts { get; set; }
-
-    public virtual DbSet<EfmigrationsHistoryOld> EfmigrationsHistoryOlds { get; set; }
 
     public virtual DbSet<ExtraImage> ExtraImages { get; set; }
 
@@ -146,15 +142,6 @@ public partial class MyPetContext : DbContext
             entity.HasOne(d => d.ProductModel).WithMany(p => p.CartProducts).HasForeignKey(d => d.ProductModelId);
         });
 
-        modelBuilder.Entity<EfmigrationsHistoryOld>(entity =>
-        {
-            entity.HasKey(e => e.MigrationId).HasName("PK___EFMigrationsHistory");
-
-            entity.ToTable("__EFMigrationsHistory_old");
-
-            entity.Property(e => e.MigrationId).HasMaxLength(150);
-            entity.Property(e => e.ProductVersion).HasMaxLength(32);
-        });
 
         modelBuilder.Entity<ExtraImage>(entity =>
         {

@@ -12,7 +12,8 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("MySuperConnection") ?? throw new InvalidOperationException("Connection string was not found");
+//var connectionString = builder.Configuration.GetConnectionString("MySuperConnection") ?? throw new InvalidOperationException("Connection string was not found");
+var connectionString = builder.Configuration.GetConnectionString("DockerConnectionString") ?? throw new InvalidOperationException("Connection string was not found");
 
 builder.Services.AddDbContext<MyPetContext>(options => options
                 .UseSqlServer(connectionString));
