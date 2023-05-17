@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CleanWebAPI.Migrations
 {
     [DbContext(typeof(MyPetContext))]
-    [Migration("20230516205259_initDB121")]
-    partial class initDB121
+    [Migration("20230517114120_initDb")]
+    partial class initDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

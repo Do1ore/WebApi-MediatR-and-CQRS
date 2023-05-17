@@ -17,7 +17,7 @@ namespace CleanWebAPI.CQRS.Products.Notifications.NotificationHandlers
 
         public async Task Handle(ProductsLoadedNotification notification, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("The caching proccess has started. Product's quantity: {0}", notification.Products.Count);
+            _logger.LogInformation("The caching proccess started. Product's quantity: {0}", notification.Products.Count);
             await Task.Run(() =>
             {
                 _memoryCache.Set("ProductList", notification.Products);

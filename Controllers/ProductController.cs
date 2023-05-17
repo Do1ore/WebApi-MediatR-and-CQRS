@@ -14,7 +14,7 @@ namespace CleanWebAPI.Controllers
         {
             _mediator = mediator;
         }
-        // GET: api/<ProductController>
+        // GET: api/<ProductController>/ProductListAsync
         [HttpGet]
         [Route("GetAllProducts")]
         public async Task<IActionResult> ProductListAsync()
