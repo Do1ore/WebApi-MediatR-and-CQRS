@@ -6,17 +6,17 @@ using MediatR;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using System.Net;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 //var connectionString = builder.Configuration.GetConnectionString("MySuperConnection") ?? throw new InvalidOperationException("Connection string was not found");
-var connectionString = builder.Configuration.GetConnectionString("DockerConnectionString") ?? throw new InvalidOperationException("Connection string was not found");
+var connectionString = builder.Configuration.GetConnectionString("PostgreSQLConnectionString") ?? throw new InvalidOperationException("Connection string was not found");
 
 builder.Services.AddDbContext<MyPetContext>(options => options
-                .UseSqlServer(connectionString));
+                .UseNpgsql(connectionString));
+
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddMediatR(cfg => cfg
                 .RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
@@ -42,16 +42,12 @@ if (app.Environment.IsDevelopment())
     {
         builder.Run(async context =>
         {
-            var logger = context.RequestServices.GetService<ILogger<Program>>(); // Получение ILogger через внедрение зависимостей
-
-            // Получить информацию об ошибке
+            var logger = context.RequestServices.GetService<ILogger<Program>>();
             var error = context.Features.Get<IExceptionHandlerFeature>();
 
-            context.Response.StatusCode = (int)await ValidErrorCode.GetErrorCode(error.Error);
-            // Сформировать HTTP-ответ с информацией об ошибке
+            context.Response.StatusCode = (int)ValidErrorCode.GetErrorCode(error.Error);
             context.Response.ContentType = "application/json";
-            // Форматировать ответ с информацией об ошибке
-            var errorMessage = "Произошла ошибка.";
+            var errorMessage = "Error occured";
             if (error != null && error.Error is Exception)
             {
                 errorMessage = error.Error.Message;

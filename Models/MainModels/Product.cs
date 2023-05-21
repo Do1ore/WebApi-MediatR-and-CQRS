@@ -35,9 +35,4 @@ public partial class Product
 
     public string? ParsedUrl { get; set; }
 
-    public virtual ICollection<CartProduct> CartProducts { get; set; } = new List<CartProduct>();
-
-    public virtual ICollection<ExtraImage> ExtraImages { get; set; } = new List<ExtraImage>();
-
-    public virtual ICollection<ProductReview> ProductReviews { get; set; } = new List<ProductReview>();
 }

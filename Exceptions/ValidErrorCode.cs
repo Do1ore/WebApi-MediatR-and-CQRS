@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using System.Net;
+﻿using System.Net;
 
 namespace CleanWebAPI.Exceptions
 {
     public sealed class ValidErrorCode
     {
-        public static async Task<HttpStatusCode> GetErrorCode(Exception exception)
+        public static HttpStatusCode GetErrorCode(Exception exception)
         {
             switch (exception)
             {
