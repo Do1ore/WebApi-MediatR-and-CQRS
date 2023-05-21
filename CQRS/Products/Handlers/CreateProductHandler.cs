@@ -1,4 +1,5 @@
-﻿using CleanWebAPI.CQRS.Products.Requests;
+﻿using CleanWebAPI.CQRS.Products.Notifications;
+using CleanWebAPI.CQRS.Products.Requests;
 using CleanWebAPI.Exceptions;
 using CleanWebAPI.Models.Context;
 using CleanWebAPI.Models.MainModels;
@@ -12,10 +13,12 @@ namespace CleanWebAPI.CQRS.Products.Handlers
     public class CreateProductHandler : IRequestHandler<CreateProductQuery, Product>
     {
         private readonly IProductRepository _repository;
+        private readonly IMediator _mediator;
 
-        public CreateProductHandler(IProductRepository repository)
+        public CreateProductHandler(IProductRepository repository, IMediator mediator)
         {
             _repository = repository;
+            _mediator = mediator;
         }
 
         public async Task<Product> Handle(CreateProductQuery request, CancellationToken cancellationToken)
@@ -26,6 +29,8 @@ namespace CleanWebAPI.CQRS.Products.Handlers
             }
             await _repository.AddProduct(request.Product);
 
+            ProductUpdatedNotification productUpdatedNotification = new();
+            await _mediator.Publish(productUpdatedNotification);
             return request.Product;
         }
     }

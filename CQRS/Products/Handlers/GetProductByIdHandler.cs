@@ -1,4 +1,5 @@
-﻿using CleanWebAPI.CQRS.Products.Notifications.Notifications;
+﻿using CleanWebAPI.CQRS.Products.Notifications;
+using CleanWebAPI.CQRS.Products.Notifications.Notifications;
 using CleanWebAPI.CQRS.Products.Requests;
 using CleanWebAPI.Exceptions;
 using CleanWebAPI.Models.MainModels;
